@@ -55,6 +55,7 @@ if (!isset($post_types) || !isset($rss_importer_feeds) || !isset($selected_post_
 
             <div class="form-group">
                 <label for="rss_post_type"><?= __('Custom Post Type', 'multi-rss-feed-importer') ?>:</label>
+                <div>
                 <select name="rss_post_type" id="rss_post_type">
                     <?php foreach ($post_types as $post_type) : ?>
                         <option value="<?php echo esc_attr($post_type->name); ?>"
@@ -63,16 +64,35 @@ if (!isset($post_types) || !isset($rss_importer_feeds) || !isset($selected_post_
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <p class="description">
+                    <?= __('Select the post type to use for imported posts.', 'multi-rss-feed-importer') ?>
+                </p>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="rss_feeds"><?= __('RSS Feed URLs', 'multi-rss-feed-importer') ?>:</label>
+                <div>
                 <textarea name="rss_feeds" id="rss_feeds" rows="5" class="large-text"><?php echo esc_textarea(implode("\n", $rss_importer_feeds)); ?></textarea>
-                <p class="description">Separate multiple URLs with a new line.</p>
+                <p class="description">
+                    <?= __('Separate multiple URLs with a new line.', 'multi-rss-feed-importer') ?>
+                </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="rss_feed_limit"><?= __('Global Feed Limit (Optional)', 'multi-rss-feed-importer') ?>:</label>
+                <div>
+                <input type="number" name="rss_feed_limit" id="rss_feed_limit" value="<?php echo esc_attr($rss_importer_limit ?? ''); ?>" class="small-text">
+                <p class="description">
+                    <?= __('Set a global limit for the total number of posts across all feeds. Leave empty or use 0 for no limit.', 'multi-rss-feed-importer') ?>
+                </p>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="rss_cron_interval"><?= __('Cron Interval', 'multi-rss-feed-importer') ?>:</label>
+                <div>
                 <select name="rss_cron_interval" id="rss_cron_interval">
                     <?php foreach ($cron_intervals as $interval => $label) : ?>
                         <option value="<?php echo esc_attr($interval); ?>" <?php selected($selected_cron_interval, $interval); ?>>
@@ -80,6 +100,10 @@ if (!isset($post_types) || !isset($rss_importer_feeds) || !isset($selected_post_
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <p class="description">
+                    <?= __('Select the interval for the cron job to run.', 'multi-rss-feed-importer') ?>
+                </p>
+                </div>
             </div>
 
             <div class="form-group">
@@ -88,14 +112,6 @@ if (!isset($post_types) || !isset($rss_importer_feeds) || !isset($selected_post_
                     <input type="checkbox" name="rss_cron_enabled" id="rss_cron_enabled" value="1" <?php checked($rss_importer_cron_enabled, 1); ?>>
                     <span class="slider round"></span>
                 </label>
-            </div>
-
-            <div class="form-group">
-                <label for="rss_feed_limit"><?= __('Global Feed Limit (Optional)', 'multi-rss-feed-importer') ?>:</label>
-                <input type="number" name="rss_feed_limit" id="rss_feed_limit" value="<?php echo esc_attr($rss_importer_limit ?? ''); ?>" class="small-text">
-                <p class="description">
-                    <?= __('Set a global limit for the total number of posts across all feeds. Leave empty or use 0 for no limit.', 'multi-rss-feed-importer') ?>
-                </p>
             </div>
 
             <div class="flex items-center gap-10 buttons">

@@ -75,6 +75,8 @@ body.toplevel_page_multi-rss-feed-importer .wrap {
     }
 }
 
+#rss-importer textarea,
+#rss-importer input[type="number"],
 #rss-importer input[type="text"],
 #rss-importer input[type="password"] {
     width: 100%;
